@@ -1,0 +1,96 @@
+Exemplo 1
+
+class Impressora {
+    public void imprimir(String texto) {
+        System.out.println("Texto: " + texto);
+    }
+    
+    public void imprimir(int numero) {
+        System.out.println("Número: " + numero);
+    }
+    
+    public void imprimir(double numero) {
+        System.out.println("Número com ponto flutuante: " + numero);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Impressora impressora = new Impressora();
+        impressora.imprimir("Olá Mundo!");
+        impressora.imprimir(42);
+        impressora.imprimir(3.14);
+    }
+
+
+}
+
+Texto: Olá Mundo! 
+Número: 42
+Número com ponto flutuante: 3.14
+
+Exemplo 2
+
+class Veiculo {
+    public void dirigir() {
+        System.out.println("Dirigindo um veículo");
+    }
+}
+
+class Carro extends Veiculo {
+    @Override
+    public void dirigir() {
+        System.out.println("Dirigindo um carro");
+    }
+}
+
+class Moto extends Veiculo {
+    @Override
+    public void dirigir() {
+        System.out.println("Dirigindo uma moto");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Veiculo veiculo = new Veiculo();
+        veiculo.dirigir();  // Saída: Dirigindo um veículo
+        
+        Veiculo carro = new Carro();
+        carro.dirigir();  // Saída: Dirigindo um carro
+        
+        Veiculo moto = new Moto();
+        moto.dirigir();  // Saída: Dirigindo uma moto
+    }
+}
+
+Dirigindo um veículo
+Dirigindo um carro
+Dirigindo uma moto
+
+
+Diagrama do exemplo 1
+
++-------------------+
+|   Impressora      |
++-------------------+
+| +imprimir(texto: String) : void  |
+| +imprimir(numero: int) : void    |
+| +imprimir(numero: double) : void |
++-------------------+
+
+
+Diagrama do exemplo 2 
+
++-------------------+
+|     Veiculo       |
++-------------------+
+| +dirigir() : void |
++-------------------+
+          ^
+          |
++-------------------+          +-------------------+
+|     Carro         |          |     Moto          |
++-------------------+          +-------------------+
+| +dirigir() : void |          | +dirigir() : void |
++-------------------+          +-------------------+
