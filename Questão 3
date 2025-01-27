@@ -1,0 +1,106 @@
+Exemplo 1 
+
+abstract class FormaDePagamento {
+    protected double valor;
+
+    // Método abstrato
+    public abstract void realizarPagamento();
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+}
+
+class CartaoDeCredito extends FormaDePagamento {
+    @Override
+    public void realizarPagamento() {
+        System.out.println("Pagamento de R$" + valor + " realizado via Cartão de Crédito.");
+    }
+}
+
+class BoletoBancario extends FormaDePagamento {
+    @Override
+    public void realizarPagamento() {
+        System.out.println("Pagamento de R$" + valor + " realizado via Boleto Bancário.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        FormaDePagamento pagamento1 = new CartaoDeCredito();
+        pagamento1.setValor(100);
+        pagamento1.realizarPagamento();  // Saída: Pagamento de R$100.0 realizado via Cartão de Crédito.
+        
+        FormaDePagamento pagamento2 = new BoletoBancario();
+        pagamento2.setValor(200);
+        pagamento2.realizarPagamento();  // Saída: Pagamento de R$200.0 realizado via Boleto Bancário.
+    }
+}
+
+Exemplo 2 
+
+abstract class Animal {
+    public abstract void fazerSom();
+}
+
+class Cachorro extends Animal {
+    @Override
+    public void fazerSom() {
+        System.out.println("Au au!");
+    }
+}
+
+class Gato extends Animal {
+    @Override
+    public void fazerSom() {
+        System.out.println("Miau!");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Animal cachorro = new Cachorro();
+        cachorro.fazerSom();  // Saída: Au au!
+        
+        Animal gato = new Gato();
+        gato.fazerSom();  // Saída: Miau!
+    }
+}
+
+
+
+Diagrama do exemplo 1
+
++--------------------------+
+| FormaDePagamento         |
++--------------------------+
+| -valor : double          |
++--------------------------+
+| +realizarPagamento() : void   |
+| +setValor(valor: double) : void|
++--------------------------+
+           ^
+           |
++-----------------------+        +-------------------------+
+| CartaoDeCredito       |        | BoletoBancario          |
++-----------------------+        +-------------------------+
+| +realizarPagamento() : void |   | +realizarPagamento() : void|
++-----------------------+        +-------------------------+
+
+
+
+Diagrama do exemplo 2
+
++------------------+
+|     Animal       |
++------------------+
+| +fazerSom() : void|
++------------------+
+        ^
+        |
++------------------+         +------------------+
+|    Cachorro      |         |      Gato        |
++------------------+         +------------------+
+| +fazerSom() : void|         | +fazerSom() : void|
++------------------+         +------------------+
+
