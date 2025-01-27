@@ -1,0 +1,157 @@
+Exemplo de uma classe concreta
+
+interface Pagamento {
+    void processarPagamento();
+    double calcularDesconto();
+}
+
+interface Entregavel {
+    void calcularTempoDeEntrega();
+}
+
+class Compra implements Pagamento, Entregavel {
+    private double valor;
+    
+    @Override
+    public void processarPagamento() {
+        System.out.println("Pagamento de R$" + valor + " processado.");
+    }
+
+    @Override
+    public double calcularDesconto() {
+        return valor * 0.1; // 10% de desconto
+    }
+
+    @Override
+    public void calcularTempoDeEntrega() {
+        System.out.println("Entrega em 3 dias úteis.");
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Compra compra = new Compra();
+        compra.setValor(100);
+        compra.processarPagamento();
+        System.out.println("Desconto: R$" + compra.calcularDesconto());
+        compra.calcularTempoDeEntrega();
+    }
+}
+
+Exemplo de uma classe abstrata
+
+interface Pagamento {
+    void processarPagamento();
+    double calcularDesconto();
+}
+
+interface Entregavel {
+    void calcularTempoDeEntrega();
+}
+
+abstract class Pedido implements Pagamento, Entregavel {
+    protected double valor;
+
+    @Override
+    public void processarPagamento() {
+        System.out.println("Pagamento processado no valor de R$ " + valor);
+    }
+
+    // Subclasse concretas devem implementar este método
+    public abstract double calcularDesconto();
+
+    @Override
+    public void calcularTempoDeEntrega() {
+        System.out.println("Entrega em 5 dias úteis.");
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+}
+
+class PedidoComDesconto extends Pedido {
+    @Override
+    public double calcularDesconto() {
+        return valor * 0.2; // 20% de desconto
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Pedido pedido = new PedidoComDesconto();
+        pedido.setValor(200);
+        pedido.processarPagamento();
+        System.out.println("Desconto: R$" + pedido.calcularDesconto());
+        pedido.calcularTempoDeEntrega();
+    }
+}
+
+
+Diagrama para Implementação de Múltiplas Interfaces em uma Classe Concreta
+
++--------------------------+
+|      Compra              |
++--------------------------+
+| -valor: double           |
++--------------------------+
+| +processarPagamento(): void |
+| +calcularDesconto(): double |
+| +calcularTempoDeEntrega(): void |
+| +setValor(valor: double): void |
++--------------------------+
+        ^
+        |
++--------------------------+
+|       Pagamento          |
++--------------------------+
+| +processarPagamento(): void |
+| +calcularDesconto(): double |
++--------------------------+
+        ^
+        |
++--------------------------+
+|      Entregavel          |
++--------------------------+
+| +calcularTempoDeEntrega(): void |
++--------------------------+
+
+
+Diagrama para Implementação de Múltiplas Interfaces em uma Classe Abstrata
+
++------------------------+
+|        Pedido          |
++------------------------+
+| -valor: double         |
++------------------------+
+| +processarPagamento(): void |
+| +calcularTempoDeEntrega(): void |
+| +setValor(valor: double): void |
+| +calcularDesconto(): double (abstract) |
++------------------------+
+          ^
+          |
++--------------------------+
+|  PedidoComDesconto       |
++--------------------------+
+| +calcularDesconto(): double |
++--------------------------+
+        ^
+        |
++--------------------------+
+|       Pagamento          |
++--------------------------+
+| +processarPagamento(): void |
+| +calcularDesconto(): double |
++--------------------------+
+        ^
+        |
++--------------------------+
+|      Entregavel          |
++--------------------------+
+| +calcularTempoDeEntrega(): void |
++--------------------------+
